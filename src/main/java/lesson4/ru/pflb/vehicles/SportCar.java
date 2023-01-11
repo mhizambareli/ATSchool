@@ -13,7 +13,15 @@ import static lesson4.ru.pflb.vehicles.VehicleClass.*;
  * К выводу в характеристики добавляется максимальная скорость.
  */
 public class SportCar extends Car {
-    int maxVelocity;
+    private int maxVelocity;
+
+    public int getMaxVelocity() {
+        return maxVelocity;
+    }
+
+    public void setMaxVelocity(int maxVelocity) {
+        this.maxVelocity = maxVelocity;
+    }
 
     /**
      * Конструктор класса SportCar
@@ -26,21 +34,18 @@ public class SportCar extends Car {
      * Класс vehicleClass для спорткара всегда = SPORTS_CAR
      */
     public SportCar(String model, int weight, Driver driver, Engine engine, int maxVelocity) {
-        this.model = model;
-        this.weight = weight;
-        this.driver = driver;
-        this.engine = engine;
+        super(model, weight, driver, engine);
         this.maxVelocity = maxVelocity;
-        this.vehicleClass = SPORTS_CAR;
+        setVehicleClass(SPORTS_CAR);
     }
 
     @Override
     public String toString() {
-        return "Модель: " + model + ", класс: " + vehicleClass
+        return "Модель: " + getModel() + ", класс: " + getVehicleClass()
                 + "\nХарактеристики:"
-                + "\nвес: " + weight + " килограмм"
+                + "\nвес: " + getWeight() + " килограмм"
                 + "\nмаксимальная скорость: " + maxVelocity + " км/ч"
-                + "\nдвигатель: " + engine.toString()
-                + "\nВодитель:\n" + driver.toString() + "\n";
+                + "\nдвигатель: " + getEngine().toString()
+                + "\nВодитель:\n" + getDriver().toString() + "\n";
     }
 }

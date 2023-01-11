@@ -9,8 +9,24 @@ package lesson4.ru.pflb;
  * - toString - возвращает строку с информацией о водителе
  */
 public abstract class Person {
-    public int age;
-    public String name;
+    private int age;
+    private String name;
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public abstract String toString();
 }

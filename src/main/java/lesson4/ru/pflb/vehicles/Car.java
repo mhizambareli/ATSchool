@@ -26,11 +26,51 @@ import lesson4.ru.pflb.professions.Driver;
  */
 
 public class Car {
-    String model;
-    VehicleClass vehicleClass;
-    int weight;
-    Driver driver;
-    Engine engine;
+    private String model;
+    private VehicleClass vehicleClass;
+    private int weight;
+    private Driver driver;
+    private Engine engine;
+
+    public String getModel() {
+        return model;
+    }
+
+    public VehicleClass getVehicleClass() {
+        return vehicleClass;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setVehicleClass(VehicleClass vehicleClass) {
+        this.vehicleClass = vehicleClass;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
 
     /**
      * Конструктор класса Car
@@ -49,25 +89,35 @@ public class Car {
         this.engine = engine;
     }
 
-    public Car() {
-        //нужен для создания отличающихся конструкторов в классах-наследниках Lorry и SportCar
-        //пока не придумала, как можно иначе реализовать это, можно ли вообще
+    /**
+     * Конструктор для унаследованных классов Lorry и SportCar без параметра vehicleClass
+     *
+     * @param model  - модель автомобиля
+     * @param weight - вес авто в кг
+     * @param driver - водитель
+     * @param engine - двигатель
+     */
+    public Car(String model, int weight, Driver driver, Engine engine) {
+        this.model = model;
+        this.weight = weight;
+        this.driver = driver;
+        this.engine = engine;
     }
 
 
-    public static void start() {
+    public void start() {
         System.out.println("Поехали");
     }
 
-    public static void stop() {
+    public void stop() {
         System.out.println("Останавливаемся");
     }
 
-    public static void turnRight() {
+    public void turnRight() {
         System.out.println("Поворот направо");
     }
 
-    public static void turnLeft() {
+    public void turnLeft() {
         System.out.println("Поворот налево");
     }
 

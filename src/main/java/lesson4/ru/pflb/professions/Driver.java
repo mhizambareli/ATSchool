@@ -15,26 +15,43 @@ import lesson4.ru.pflb.Person;
  * - № удостоверения: <licenseId>
  */
 public class Driver extends Person {
-    int drivingExperience;
-    String licenseId;
+    private int drivingExperience;
+    private String licenseId;
+
+    public int getDrivingExperience() {
+        return drivingExperience;
+    }
+
+    public String getLicenseId() {
+        return licenseId;
+    }
+
+    public void setDrivingExperience(int drivingExperience) {
+        this.drivingExperience = drivingExperience;
+    }
+
+    public void setLicenseId(String licenseId) {
+        this.licenseId = licenseId;
+    }
 
     /**
      * Конструктор для Driver
-     * @param name - имя водителя
-     * @param age - возраст водителя в целых годах
+     *
+     * @param name              - имя водителя
+     * @param age               - возраст водителя в целых годах
      * @param drivingExperience - опыт вождения водителя в целых годах
-     * @param licenseId - номер водительского удостоверения
+     * @param licenseId         - номер водительского удостоверения
      */
     public Driver(String name, int age, int drivingExperience, String licenseId) {
-        this.name = name;
-        this.age = age;
+        setName(name);
+        setAge(age);
         this.drivingExperience = drivingExperience;
         this.licenseId = licenseId;
     }
 
     @Override
     public String toString() {
-        return name + " - возраст: " + age
+        return getName() + " - возраст: " + getAge()
                 + "\nстаж: " + drivingExperience
                 + "\n№ удостоверения: " + licenseId;
     }

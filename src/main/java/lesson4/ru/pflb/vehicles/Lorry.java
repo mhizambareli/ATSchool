@@ -15,7 +15,15 @@ import static lesson4.ru.pflb.vehicles.VehicleClass.*;
  * К выводу в характеристики добавляется грузоподъемность.
  */
 public class Lorry extends Car {
-    int loadingAmount;
+    private int loadingAmount;
+
+    public int getLoadingAmount() {
+        return loadingAmount;
+    }
+
+    public void setLoadingAmount(int loadingAmount) {
+        this.loadingAmount = loadingAmount;
+    }
 
     /**
      * Конструктор класса Lorry
@@ -28,25 +36,22 @@ public class Lorry extends Car {
      * Класс грузовика vehicleClass определяется на основании loadingAmount
      */
     public Lorry(String model, int weight, Driver driver, Engine engine, int loadingAmount) {
-        this.model = model;
-        this.weight = weight;
-        this.driver = driver;
-        this.engine = engine;
+        super(model, weight, driver, engine);
         this.loadingAmount = loadingAmount;
         if (loadingAmount < 7000) {
-            this.vehicleClass = MEDIUM;
+            setVehicleClass(MEDIUM);
         } else {
-            this.vehicleClass = LARGE;
+            setVehicleClass(LARGE);
         }
     }
 
     @Override
     public String toString() {
-        return "Модель: " + model + ", класс: " + vehicleClass
+        return "Модель: " + getModel() + ", класс: " + getVehicleClass()
                 + "\nХарактеристики:"
-                + "\nвес: " + weight + " килограмм"
+                + "\nвес: " + getWeight() + " килограмм"
                 + "\nгрузоподъёмность: " + loadingAmount + " килограмм"
-                + "\nдвигатель: " + engine.toString()
-                + "\nВодитель:\n" + driver.toString() + "\n";
+                + "\nдвигатель: " + getEngine().toString()
+                + "\nВодитель:\n" + getDriver().toString() + "\n";
     }
 }
