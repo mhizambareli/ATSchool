@@ -1,5 +1,7 @@
 package lesson6.part3;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Main {
 
     /**
@@ -21,7 +23,7 @@ public class Main {
         return a1 % b1 == 0;
     }
 
-    public static void main(String[] args) {
+    public static void main(String @NotNull [] args) {
         System.out.println(isDivisible(args[0], args[1]));
     }
 
