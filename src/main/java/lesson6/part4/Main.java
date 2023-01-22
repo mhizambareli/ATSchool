@@ -16,23 +16,24 @@ import org.jetbrains.annotations.NotNull;
  * 2)Дано: P = 40000, r = 0.05, t = 5
  * 51361.016667509655
  */
+
+/**
+ * ежегодный процент r в моей реализации принимается в формате "5", в методе идёт приведение к формату 0.05 для расчёта
+ * при вводе r = 0.05, результат будет посчитан как 0.05%, т.е пять сотых процента в год
+ */
 public class Main {
-    /**
-     * ежегодный процент r в моей реализации принимается в формате "5", в методе идёт приведение к формату 0.05 для расчёта
-     * при вводе r = "0.05", результат будет посчитан как 0.05%, т.е пять сотых процента в год
-     */
-    public static String countDeposit(String P, String r, String t) {
+    public static String countDeposit(double P, double r, double t) {
         String given = "Дано: P = " + P + ", r = " + r + ", t = " + t + "\n";
-        //парсим выходные данные в double, т.к. в main() аргументы принимаются в String, а результат должен быть дробным числом
-        double P1 = Double.parseDouble(P);
-        double r1 = Double.parseDouble(r);
-        r1 = r1 / 100; //для перевода 5% в формат 0.05 для формулы
-        double t1 = Double.parseDouble(t);
-        double result = P1 * Math.exp(r1 * t1);
+        r = r / 100; //для перевода 5% в формат 0.05 для формулы
+        double result = P * Math.exp(r * t);
         return given + result;
     }
 
     public static void main(String [] args) {
-        System.out.println(countDeposit(args[0], args[1], args[2]));
+        //парсим данные в double, т.к. в main() аргументы принимаются в String
+        double P = Double.parseDouble(args[0]);
+        double r = Double.parseDouble(args[1]);
+        double t = Double.parseDouble(args[2]);
+        System.out.println(countDeposit(P, r, t));
     }
 }

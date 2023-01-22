@@ -9,9 +9,7 @@ public class Main {
      */
     public static void swapWithoutBuffer(int a, int b) {
         System.out.println("Дано: a = " + a + ", b = " + b);
-        a = a + b;
-        b = a - b;
-        a = a - b;
+        a = a ^ b ^ (b = a); //понятия не имею, как именно этот ваш XOR тут работает, но он работает ¯\_(ツ)_/¯
         System.out.println("После перестановки: a = " + a + ", b = " + b);
     }
 
