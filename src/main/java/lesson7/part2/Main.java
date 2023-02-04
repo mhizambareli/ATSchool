@@ -13,8 +13,8 @@ public class Main {
         double x = 8293;
         double y = 1564;
         double z = 3656;
-        Integer a2 = new Integer(a);
-        Integer b2 = new Integer(b);
+        Integer a2 = a;
+        Integer b2 = b;
 
         System.out.println(sum(a, b));
         System.out.println(sum(a, b, b));

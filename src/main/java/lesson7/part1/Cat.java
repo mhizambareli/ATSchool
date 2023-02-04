@@ -11,6 +11,11 @@ public class Cat {
     int weight; //вес в килограммах
     String furColor; //цвет шерсти
 
+    static int defaultAge = 1;
+    static String defaultEyeColor = "Зелёный";
+    static int defaultWeight = 4;
+    static String defaultFurColor = "Чёрный";
+
     /*
     * Создаю 12 конструкторов с разными наборами параметров: от полного набора 4 параметров до отсутствия параметров
     */
@@ -22,43 +27,43 @@ public class Cat {
     }
 
     public Cat(int age, String eyeColor, int weight) {
-        this(age, eyeColor, weight, "Чёрный"); //вызов без цвета шерсти, по умолчанию будет чёрный цвет шерсти
+        this(age, eyeColor, weight, defaultFurColor); //вызов без цвета шерсти, по умолчанию будет чёрный цвет шерсти
     }
 
     public Cat(int age, String eyeColor, String furColor) {
-        this(age, eyeColor, 4, furColor); //вызов без веса, по умолчанию будет вес 4 кг
+        this(age, eyeColor, defaultWeight, furColor); //вызов без веса, по умолчанию будет вес 4 кг
     }
 
     public Cat(int age, int weight, String furColor) {
-        this(age, "Зелёный", weight, furColor); // вызов без цвета глаз, по умолчанию будет зелёный цвет глаз
+        this(age, defaultEyeColor, weight, furColor); // вызов без цвета глаз, по умолчанию будет зелёный цвет глаз
     }
 
     public Cat(String eyeColor, int weight, String furColor) {
-        this(1, eyeColor, weight, furColor); //вызов без возраста, по умолчанию возраст 1 год.
+        this(defaultAge, eyeColor, weight, furColor); //вызов без возраста, по умолчанию возраст 1 год.
     }
 
     public Cat(int age, String eyeColor) {
-        this(age, eyeColor, 4);
+        this(age, eyeColor, defaultWeight);
     }
 
     public Cat(int age, int weight) {
-        this(age, weight, "Чёрный");
+        this(age, weight, defaultFurColor);
     }
 
     public Cat(String eyeColor, int weight) {
-        this(1, eyeColor, weight);
+        this(defaultAge, eyeColor, weight);
     }
 
     public Cat(String eyeColor, String furColor) {
-        this(1, eyeColor, furColor);
+        this(defaultAge, eyeColor, furColor);
     }
 
     public Cat(int age) {
-        this(age, 4);
+        this(age, defaultWeight);
     }
 
     public Cat(String furColor) {
-        this("Зелёный", furColor);
+        this(defaultEyeColor, furColor);
     }
 
     /*
@@ -69,7 +74,7 @@ public class Cat {
      *цвет шерсти - чёрный
      */
     public Cat() {
-        this(1);
+        this(defaultAge);
     }
 
     @Override
