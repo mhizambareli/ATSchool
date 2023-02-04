@@ -31,7 +31,7 @@ public class Main {
         double cSqr = c * c;
 
         //сначала проверки на то, что треугольник не существует, и если всё-таки существует, то проверки на то, какой угол.
-        if ((a + b <= c) || (b + c <= a) || (a + c <= b) || (a <= 0) || (b <= 0) || (c <= 0))
+        if ((a <= 0) || (b <= 0) || (c <= 0) || (a + b <= c) || (b + c <= a) || (a + c <= b))
             System.out.println("impossible");
         else {
             if (aSqr + bSqr == cSqr) System.out.println("right");

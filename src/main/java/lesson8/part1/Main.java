@@ -7,19 +7,8 @@ package lesson8.part1;
  */
 public class Main {
     public static void findMax(int a, int b, int c) {
-        if (a > b) {
-            if (a > c) {
-                System.out.println(a);
-            } else {
-                System.out.println(c);
-            }
-        } else {
-            if (b > c) {
-                System.out.println(b);
-            } else {
-                System.out.println(c);
-            }
-        }
+        int max = a >= b && a >= c ? a : (b >= a && b >= c ? b : c);
+        System.out.println(max);
     }
 
     public static void main(String[] args) {
