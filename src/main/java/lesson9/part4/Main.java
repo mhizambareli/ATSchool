@@ -13,7 +13,7 @@ import java.util.Random;
  * java.lang.Math или java.util.Random.
  */
 public class Main {
-    static int n = 0;
+    static int n = 15513400; //верхняя граница для генерации чисел
 
     public static boolean isPrime(int x) {
         if (x == 2) return true;
@@ -32,10 +32,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int x = 15513400; //верхняя граница для генерации чисел в цикле for
-        for (n = nextInt(x); isPrime(n) == false; n = nextInt(x)) {
-            System.out.println("Выпало число " + n + ". Оно не простое");
+        int number; //переменная, куда будем складывать сгенерированные числа для проверки
+        for (number = nextInt(n); !isPrime(number); number = nextInt(n)) {
+            System.out.println("Выпало число " + number + ". Оно не простое");
         }
-        System.out.println("Finally! Выпало простое число " + n);
+        System.out.println("Выпало простое число " + number);
     }
 }
