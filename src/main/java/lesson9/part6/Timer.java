@@ -6,7 +6,7 @@ package lesson9.part6;
  * - статический метод void waitSecond() - метод реализует паузу одной секунды. Реализовать с помощью цикла.
  * - метод printTime вывода оставшегося времени в минутах и секундах.
  * - объектный метод start() - запускает обратный отсчет и каждую секунды выводит оставшееся количество секунд.
- *
+ * <p>
  * Нужно проверить, что введенное число seconds больше нуля или равно нулю.
  * В противном случае выведите сообщение об ошибке и завершите программу.
  */
@@ -28,19 +28,16 @@ public class Timer {
 
     public void printTime(int seconds) {
         int minutes = seconds / 60;
-        String minutesStr = minutes < 10 ? "0" + minutes : "" + minutes; //приводим минуты к формату 01, если минут меньше 10.
         seconds = seconds % 60;
-        String secondsStr = seconds < 10 ? "0" + seconds : "" + seconds; //приводим секунды к формату 01, если секунд меньше 10.
-        System.out.println(minutesStr + ":" + secondsStr);
+        System.out.printf("%s:%s\n", (minutes < 10 ? "0" + minutes : "" + minutes), (seconds < 10 ? "0" + seconds : "" + seconds));
     }
 
     public void start() {
-        do {
+        for (; seconds > 0; seconds--) {
             printTime(seconds);
             waitSecond();
-            seconds -= 1;
-        } while (seconds >= 0);
+        }
+        //в случае, если осталось 0 секунд, секундная пауза больше не нужна, просто печатаем время
+        if (seconds == 0) printTime(seconds);
     }
-
-
 }
