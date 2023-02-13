@@ -25,10 +25,8 @@ public class Main {
 
         while (i < str.length()) {
             char ch = str.charAt(i);
-            if (ch >= '0' && ch <= '9') {
-                int digit = ch - '0';
-                result = result * 10 + digit;
-            }
+            int digit = ch - '0';
+            result = result * 10 + digit;
             i++;
         }
         return sign * result;
@@ -40,14 +38,13 @@ public class Main {
         boolean parsableToInt = true; //переменная, которая даёт ответ на вопрос: можем ли мы перевести строку в int?
 
         for (int i = 0; i < str.length(); i++) {
-            if (str.length() == 1) {
-                if (str.charAt(i) == '-') {
-                    parsableToInt = false;
-                    break;
-                }
+            if (str.length() == 1 && str.charAt(0) == '-') { //обработка строки "-", где минус это первый и единственный символ
+                parsableToInt = false;
+                break;
             }
-            if (str.length() > 1 && i == 0 && str.charAt(i) == '-')
-                i++; //первый символ может быть -, если он не является единственным символом в строке
+            if (str.length() > 1 && i == 0 && str.charAt(0) == '-') //первый символ может быть минусом, если он не является единственным символом в строке
+                i++;
+
             char ch = str.charAt(i);
             if (ch < '0' || ch > '9') {
                 parsableToInt = false;
@@ -62,9 +59,8 @@ public class Main {
             BigInteger num = new BigInteger(args[0]);
             BigInteger minInt = BigInteger.valueOf(Integer.MIN_VALUE);
             BigInteger maxInt = BigInteger.valueOf(Integer.MAX_VALUE);
-            if (num.compareTo(minInt) == -1 || num.compareTo(maxInt) == 1) {
+            if (num.compareTo(minInt) == -1 || num.compareTo(maxInt) == 1)
                 parsableToInt = false;
-            }
         }
         System.out.println(parsableToInt ? toInt(str) * 2L : "Строка не может быть преобразована в целое число типа int");
     }
