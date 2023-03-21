@@ -27,9 +27,7 @@ public class Timer {
     }
 
     public void printTime(int seconds) {
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
-        System.out.printf("%s:%s\n", (minutes < 10 ? "0" + minutes : "" + minutes), (seconds < 10 ? "0" + seconds : "" + seconds));
+        System.out.printf("%02d:%02d\n", seconds / 60, seconds % 60);
     }
 
     public void start() {
