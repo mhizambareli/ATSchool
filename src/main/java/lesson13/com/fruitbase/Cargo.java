@@ -121,7 +121,7 @@ public class Cargo {
 
     @Override
     public String toString() {
-        if (order.length == 0) return "Указанных фруктов не найдено. Заказ невозможен.";
+        if (order.length == 0) return "Фруктов не найдено. Заказ невозможен.";
         else return "Груз весом " + getWeight() + " кг на сумму " + getPrice() + " у.е\n" +
                 "Состав груза: " + namesInOrder() + "\n";
     }

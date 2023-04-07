@@ -31,9 +31,9 @@ public class FruitCatalogue {
      * @param fruitName название фрукта, по которому будет происходить поиск
      * @return фрукт типа Fruit. Если фрукт не найден - возвращается null
      */
-    lesson13.com.fruitbase.fruits.Fruit findFruit(String fruitName) {
-        for (lesson13.com.fruitbase.fruits.Fruit fruit : fruits)
-            if (fruit.getName().equals(fruitName)) return fruit;
+        Fruit findFruit(String fruitName) {
+        for (Fruit fruit : fruits)
+            if (fruit.getName().equals(fruitName)) return fruit.clone();
         return null;
     }
 }
