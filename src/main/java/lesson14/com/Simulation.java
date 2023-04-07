@@ -6,19 +6,23 @@ import lesson14.com.customer.UniqueCustomer;
 import lesson14.com.fruitbase.FruitBase;
 import lesson14.com.fruitbase.fruits.Fruit;
 
+import java.math.BigDecimal;
+
 import static lesson14.com.fruitbase.fruits.Freshness.OVERRIPED;
 
 
 /**
- * Добавить специальный класс Simulation, внутри которого теперь будет выполняться программа.
- * Для этого в него перенесем метод main из Fruitbase и внесем изменения:
- * - после создания объекта FruitBase создается массив покупателей, в который будут входит экземпляры обоих видов покупателей
- * - далее для каждого покупателя:
- * выполняется заказ и формируется груз
- * выводится информации о грузе
- * покупатель выбирает из груза интересующие его фрукты
- * покупатель выводит полученные фрукты
- * выводится информации об оставшемся грузе
+ * Для использования методов экспорта и импорта каталога добавьте обработку специальных аргументов ("флагов") в классе Simulation.
+ * в методе main после создания объекта FruitBase добавьте проверку аргументов:
+ * - если передан флаг "-e" или "--export", то вызовите метод exportCatalogue у объекта FruitBase
+ * - если передан флаг "-i" или "--import", то вызовите метод importCatalogue у объекта FruitBase
+ * <p>
+ * Подготовьте необходимые классы к сериализации.
+ * <p>
+ * Для проверки экспортируйте каталог, зафиксируйте стоимость и вес полученного груза.
+ * После экспорта каталога измените вес и цены у фруктов и зафиксируйте новые вес и стоимость.
+ * Далее попробуйте имортировать каталог и обратите внимание, что стоимость и вес груза
+ * расчитаны согласно экспортированному каталогу.
  */
 public class Simulation {
     public static void main(String[] args) {
@@ -27,24 +31,34 @@ public class Simulation {
             System.out.println("Заказ отсутствует, введите данные.");
             System.exit(1);
         }
-        System.out.print("Первоначальный груз: ");
+        if(args[0].equals("-e") || args[0].equals("--export")){
+            base.exportCatalogue();
+        }
+        if(args[0].equals("-i")|| args[0].equals("--import")){
+            base.importCatalogue();
+        }
+
+        base.exportCatalogue(); //Для проверки явно экспортирую каталог
+        System.out.println("зафиксируем стоимость и вес полученного груза изначально:");
         base.takeOrder(args);
 
-        base.getCargo().getFruits()[0].setFreshness(OVERRIPED);//хардкодим пока первый фрукт в грузе перезрелым для проверки выбора свежих фруктов
+        //После экспорта каталога изменяем вес
+        base.getCatalogue().getFruits()[0].setWeight(1111.1);
+        base.getCatalogue().getFruits()[1].setWeight(2222.22);
+        base.getCatalogue().getFruits()[2].setWeight(3333.333);
+        base.getCatalogue().getFruits()[3].setWeight(4444.4);
 
-        UniqueCustomer customer1 = new UniqueCustomer(new Fruit[0], "ООО Уникальные Овощи"); //актуальный массив будет установлен далее через сеттер в takeFruits()
-        FreshCustomer customer2 = new FreshCustomer(new Fruit[0], "ООО Свежие Овощи"); //актуальный массив будет установлен далее через сеттер в takeFruits()
+        //и цену на фрукты в каталоге
+        base.getCatalogue().getFruits()[0].setPrice(BigDecimal.valueOf(111.1));
+        base.getCatalogue().getFruits()[1].setPrice(BigDecimal.valueOf(222.222));
+        base.getCatalogue().getFruits()[2].setPrice(BigDecimal.valueOf(333.333));
+        base.getCatalogue().getFruits()[3].setPrice(BigDecimal.valueOf(4444.44));
 
-        Customer[] customers = new Customer[]{customer1, customer2};
+        System.out.println("зафиксируем стоимость и вес полученного груза после внесения изменений в каталог:");
+        base.takeOrder(args);
 
-        for (Customer customer : customers) {
-            customer.takeFruits(base.getCargo().getFruits()); //выбираем фрукты в зависимости от того, какой это покупатель - свежие или уникальные фрукты
-            System.out.printf("Покупатель %s выбрал: ", customer.getName());
-            customer.printPurchases(); //выводим выбранные покупателем фрукты
-            for (int i = 0; i < customer.getPurchases().length; i++) {
-                base.getCargo().removeFruit(customer.getPurchases()[i]); //удаление фруктов из груза, если фрукты были выбраны покупателем
-            }
-            System.out.println("Оставшийся груз: " + base.getCargo()); //выводим информацию об оставшемся грузе после выбора покупателя.
-        }
+        base.importCatalogue(); //импортируем обратно ранее экспортированный каталог
+        System.out.println("зафиксируем стоимость и вес полученного груза после импорта каталога:");
+        base.takeOrder(args);
     }
 }

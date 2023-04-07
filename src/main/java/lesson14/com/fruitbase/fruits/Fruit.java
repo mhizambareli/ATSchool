@@ -1,20 +1,21 @@
 package lesson14.com.fruitbase.fruits;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import static lesson13.com.fruitbase.fruits.Freshness.FRESH;
+import static lesson14.com.fruitbase.fruits.Freshness.FRESH;
 
 /**
  * Для фруктов нужно добавить
- *         - внутренний параметр freshness - отражает состояние свежести фрукта;
- *           для значений нужно завести enum с как минимум состояниями: FRESH, OVERRIPED, SPOILED
- *           при создании объект имеет состояние FRESH
- *         - метод equals
- *         - метод hashcode
- *         - метод isFresh - возвращает true, если параметр freshness имеет состояние FRESH
+ * - внутренний параметр freshness - отражает состояние свежести фрукта;
+ * для значений нужно завести enum с как минимум состояниями: FRESH, OVERRIPED, SPOILED
+ * при создании объект имеет состояние FRESH
+ * - метод equals
+ * - метод hashcode
+ * - метод isFresh - возвращает true, если параметр freshness имеет состояние FRESH
  */
-public abstract class Fruit {
+public abstract class Fruit implements Serializable {
     private double weight; //вес в кг
     private BigDecimal price; // цена за фрукт в у.е
     private String name; //наименование фрукта
@@ -27,6 +28,13 @@ public abstract class Fruit {
         freshness = FRESH;
     }
 
+    /**
+     * Метод клонирования объектов классов-наследников Fruit
+     *
+     * @return новый объект класса-наследника Fruit с теми же полями, что и у объекта, у которого метод был вызван.
+     */
+    public abstract Fruit clone();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,8 +42,7 @@ public abstract class Fruit {
         Fruit fruit = (Fruit) o;
         return Double.compare(fruit.weight, weight) == 0
                 && Objects.equals(price, fruit.price)
-                && Objects.equals(name, fruit.name)
-                && freshness == fruit.freshness;
+                && Objects.equals(name, fruit.name);
     }
 
     @Override
@@ -45,10 +52,11 @@ public abstract class Fruit {
 
     /**
      * Метод проверяет свежий ли продукт
+     *
      * @return значение true, если фрукт свежий
      * или false в остальных случаях
      */
-    public boolean isFresh(){
+    public boolean isFresh() {
         return this.freshness == FRESH ? true : false;
     }
 
@@ -62,6 +70,18 @@ public abstract class Fruit {
 
     public String getName() {
         return name;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Freshness getFreshness() {

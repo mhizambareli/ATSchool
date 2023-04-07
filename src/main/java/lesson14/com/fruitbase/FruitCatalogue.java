@@ -1,8 +1,9 @@
 package lesson14.com.fruitbase;
 
-import lesson14.com.fruitbase.com.fruitbase.fruits.*;
+import com.sun.source.doctree.SerialDataTree;
 import lesson14.com.fruitbase.fruits.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
  * по переданному слову проверяет есть ли информация о таком фрукте
  * если есть, то возвращает Fruit. Если нет, то возвращает null.
  */
-public class FruitCatalogue {
+public class FruitCatalogue implements Serializable {
     private Fruit[] fruits; //каталог, список фруктов
 
     public FruitCatalogue() {
@@ -34,7 +35,11 @@ public class FruitCatalogue {
      */
     Fruit findFruit(String fruitName) {
         for (Fruit fruit : fruits)
-            if (fruit.getName().equals(fruitName)) return fruit;
+            if (fruit.getName().equals(fruitName)) return fruit.clone();
         return null;
+    }
+
+    public Fruit[] getFruits() {
+        return fruits;
     }
 }
