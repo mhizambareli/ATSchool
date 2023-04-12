@@ -1,6 +1,6 @@
-package lesson15.part2.com;
+package lesson15.com;
 
-import lesson15.part2.com.fruitbase.FruitBase;
+import lesson15.com.fruitbase.FruitBase;
 
 import java.math.BigDecimal;
 

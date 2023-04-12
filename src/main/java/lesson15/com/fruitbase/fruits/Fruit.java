@@ -1,4 +1,4 @@
-package lesson15.part2.com.fruitbase.fruits;
+package lesson15.com.fruitbase.fruits;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

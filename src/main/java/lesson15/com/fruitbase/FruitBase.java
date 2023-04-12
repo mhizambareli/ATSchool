@@ -1,4 +1,4 @@
-package lesson15.part2.com.fruitbase;
+package lesson15.com.fruitbase;
 
 import java.io.*;
 

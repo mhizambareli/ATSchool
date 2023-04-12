@@ -1,6 +1,6 @@
-package lesson15.part2.com.fruitbase;
+package lesson15.com.fruitbase;
 
-import lesson15.part2.com.fruitbase.fruits.Fruit;
+import lesson15.com.fruitbase.fruits.Fruit;
 
 import java.math.BigDecimal;
 
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * если такого фрукта нет во внутреннем списке, то метод завершается
  * иначе убирает фрукт с указанным названием из внутреннего массива и возвращает его
  */
-public class Cargo implements Delivery{
+public class Cargo implements Delivery {
     private Fruit[] order; //список добавленных фруктов в заказ
 
     public Cargo() {
@@ -56,9 +56,8 @@ public class Cargo implements Delivery{
      * Метод добавляет фрукт типа Fruit в список заказа
      *
      * @param fruit фрукт, который хотим добавить
-     * @return расширенный массив заказа уже с добавленным фруктом
      */
-        public void addFruit(Fruit fruit) {
+    public void addFruit(Fruit fruit) {
         Fruit[] newOrder = new Fruit[order.length + 1];
         for (int i = 0; i < order.length; i++) {
             newOrder[i] = order[i];
@@ -93,9 +92,9 @@ public class Cargo implements Delivery{
      * Метод удаляет переданный фрукт из внутреннего массива, если таков найден в массиве
      *
      * @param fruit фрукт, который нужно удалить из массива
-     * @return новый массив без переданного фрукта
+     * @return если найден фрукт, то возвращается этот фрукт, если нет, то null
      */
-    public Fruit[] removeFruit(Fruit fruit) {
+    public Fruit removeFruit(Fruit fruit) {
         int nullCounter = 0; //в итоге 0 = ничего не удалялось, 1 = удалили фрукт.
         for (int i = 0; i < order.length; i++) {
             if (order[i] == null) continue;
@@ -105,7 +104,7 @@ public class Cargo implements Delivery{
                 break;
             }
         }
-        if (nullCounter == 0) return order; //не нашли фрукт во внутреннем массиве, ничего не удалили
+        if (nullCounter == 0) return null; //не нашли фрукт во внутреннем массиве, ничего не удалили
 
         Fruit[] newArr = new Fruit[order.length - 1];
         for (int i = 0, j = 0; i < order.length; i++) {
@@ -115,7 +114,7 @@ public class Cargo implements Delivery{
             }
         }
         order = newArr;
-        return order;
+        return fruit;
     }
 
     @Override

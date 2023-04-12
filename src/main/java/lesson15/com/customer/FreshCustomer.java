@@ -1,6 +1,6 @@
-package lesson15.part2.com.customer;
+package lesson15.com.customer;
 
-import lesson15.part2.com.fruitbase.fruits.Fruit;
+import lesson15.com.fruitbase.fruits.Fruit;
 
 public class FreshCustomer extends Customer {
     public FreshCustomer(Fruit[] purchases, String name) {

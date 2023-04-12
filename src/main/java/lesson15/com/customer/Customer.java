@@ -1,6 +1,6 @@
-package lesson15.part2.com.customer;
+package lesson15.com.customer;
 
-import lesson15.part2.com.fruitbase.fruits.Fruit;
+import lesson15.com.fruitbase.fruits.Fruit;
 
 /**
  * Надо создать новый пакет customers и в нем создать новые классы
