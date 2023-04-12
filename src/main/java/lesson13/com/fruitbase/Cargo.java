@@ -55,17 +55,15 @@ public class Cargo {
     /**
      * Метод добавляет фрукт типа Fruit в список заказа
      *
-     * @param fruit фрукт, который хотим добавить
-     * @return расширенный массив заказа уже с добавленным фруктом
+     * @param fruit фрукт, который хотим добавить во внутренний массив
      */
-    public Fruit[] addFruit(Fruit fruit) {
+    void addFruit(Fruit fruit) {
         Fruit[] newOrder = new Fruit[order.length + 1];
         for (int i = 0; i < order.length; i++) {
             newOrder[i] = order[i];
         }
         newOrder[newOrder.length - 1] = fruit; //последний элемент расширенного массива = переданный фрукт
         order = newOrder; // присваиваем newOrder в качестве нового массива order
-        return order;
     }
 
     /**
