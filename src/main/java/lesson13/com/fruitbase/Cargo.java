@@ -94,9 +94,9 @@ public class Cargo {
      * Метод удаляет переданный фрукт из внутреннего массива, если таков найден в массиве
      *
      * @param fruit фрукт, который нужно удалить из массива
-     * @return новый массив без переданного фрукта
+     * @return если найден фрукт, то возвращается этот фрукт, если нет, то null
      */
-    public Fruit[] removeFruit(Fruit fruit) {
+    public Fruit removeFruit(Fruit fruit) {
         int nullCounter = 0; //в итоге 0 = ничего не удалялось, 1 = удалили фрукт.
         for (int i = 0; i < order.length; i++) {
             if (order[i] == null) continue;
@@ -106,7 +106,7 @@ public class Cargo {
                 break;
             }
         }
-        if (nullCounter == 0) return order; //не нашли фрукт во внутреннем массиве, ничего не удалили
+        if (nullCounter == 0) return null; //не нашли фрукт во внутреннем массиве, ничего не удалили
 
         Fruit[] newArr = new Fruit[order.length - 1];
         for (int i = 0, j = 0; i < order.length; i++) {
@@ -116,7 +116,7 @@ public class Cargo {
             }
         }
         order = newArr;
-        return order;
+        return fruit;
     }
 
     @Override
