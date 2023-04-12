@@ -1,6 +1,5 @@
 package lesson15.part2.com.fruitbase;
 
-import lesson15.com.fruitbase.fruits.*;
 import lesson15.part2.com.fruitbase.fruits.*;
 
 import java.io.Serializable;

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * если такого фрукта нет во внутреннем списке, то метод завершается
  * иначе убирает фрукт с указанным названием из внутреннего массива и возвращает его
  */
-public class Cargo {
+public class Cargo implements Delivery{
     private Fruit[] order; //список добавленных фруктов в заказ
 
     public Cargo() {
@@ -58,14 +58,13 @@ public class Cargo {
      * @param fruit фрукт, который хотим добавить
      * @return расширенный массив заказа уже с добавленным фруктом
      */
-    public Fruit[] addFruit(Fruit fruit) {
+        public void addFruit(Fruit fruit) {
         Fruit[] newOrder = new Fruit[order.length + 1];
         for (int i = 0; i < order.length; i++) {
             newOrder[i] = order[i];
         }
         newOrder[newOrder.length - 1] = fruit; //последний элемент расширенного массива = переданный фрукт
         order = newOrder; // присваиваем newOrder в качестве нового массива order
-        return order;
     }
 
     /**

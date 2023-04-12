@@ -16,9 +16,9 @@ import java.io.*;
 public class FruitBase implements Serializable {
     private static final long serialVersionUID = 1L;
     private FruitCatalogue catalogue;
-    private Cargo cargo;
+    private Delivery cargo;
 
-    public Cargo getCargo() {
+    public Delivery getCargo() {
         return cargo;
     }
 
