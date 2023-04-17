@@ -1,10 +1,9 @@
 package lesson16.part1.basicElements;
 
 import lesson16.part1.NatureElement;
-import lesson16.part1.derivedElements.Mud;
-import lesson16.part1.derivedElements.Rain;
-import lesson16.part1.derivedElements.Sea;
-import lesson16.part1.derivedElements.Steam;
+import lesson16.part1.derivedElements.*;
+
+import java.util.NoSuchElementException;
 
 public class Water extends NatureElement {
     public Water(String name) {
@@ -18,6 +17,7 @@ public class Water extends NatureElement {
      * Water + Fire = Steam
      * Water + Earth = Mud
      * Water + Air = Rain
+     * Water + Energy = Steam
      *
      * @param element элемент, который добавляем к текущему элементу
      * @return новый результирующий элемент по результатам сложения
@@ -41,6 +41,12 @@ public class Water extends NatureElement {
             result = new Sea("Sea");
             System.out.println(this.getName() + " + " + element.getName() + " = " + result.getName());
         }
+        if (element instanceof Energy) {
+            result = new Steam("Steam");
+            System.out.println(this.getName() + " + " + element.getName() + " = " + result.getName());
+        }
+        if (result == null) throw new UnsupportedOperationException();
+
         return result;
     }
 }

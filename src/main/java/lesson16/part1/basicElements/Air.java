@@ -23,7 +23,7 @@ public class Air extends NatureElement {
      * @return новый результирующий элемент по результатам сложения
      */
     @Override
-    public NatureElement connect(NatureElement element) {
+    public NatureElement connect(NatureElement element) throws UnsupportedOperationException {
         NatureElement result = null;
         if (element instanceof Air) {
             result = new Pressure("Pressure");
@@ -41,6 +41,8 @@ public class Air extends NatureElement {
             result = new Rain("Rain");
             System.out.println(this.getName() + " + " + element.getName() + " = " + result.getName());
         }
+        if (result == null) throw new UnsupportedOperationException();
+
         return result;
     }
 }

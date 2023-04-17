@@ -5,6 +5,8 @@ import lesson16.part1.basicElements.Earth;
 import lesson16.part1.basicElements.Fire;
 import lesson16.part1.basicElements.Water;
 
+import java.util.NoSuchElementException;
+
 public abstract class NatureElement {
     private String name;
 
@@ -12,7 +14,7 @@ public abstract class NatureElement {
         return name;
     }
 
-    public abstract NatureElement connect(NatureElement element);
+    public abstract NatureElement connect(NatureElement element) throws UnsupportedOperationException;
 
     public NatureElement(String name) {
         this.name = name;
@@ -21,10 +23,10 @@ public abstract class NatureElement {
     /**
      *
      * @param name название элемента
-     * @return создаёт новый базовый элемент по названию и возвращает его, если название известно
-     * для неизвестных нназваний возвращает null
+     * @return создаёт новый базовый элемент по названию и возвращает его, если название известно.
+     * Для неизвестных названий выкидывает исключение NoSuchElementException
      */
-    public static NatureElement create(String name) {
+    public static NatureElement create(String name) throws NoSuchElementException {
         switch (name) {
             case "Air":
                 return new Air(name);
@@ -36,7 +38,7 @@ public abstract class NatureElement {
                 return new Earth(name);
             default:
                 System.out.println("Неизвестный элемент с именем " + name);
-                return null;
+                throw new NoSuchElementException();
         }
     }
 }

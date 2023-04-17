@@ -39,6 +39,8 @@ public class Fire extends NatureElement {
             result = new Steam("Steam");
             System.out.println(this.getName() + " + " + element.getName() + " = " + result.getName());
         }
+        if (result == null) throw new UnsupportedOperationException();
+
         return result;
     }
 }

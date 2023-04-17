@@ -9,7 +9,6 @@ public class Steam extends NatureElement {
 
     @Override
     public NatureElement connect(NatureElement element) {
-        System.out.println("Нет нового элемента");
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

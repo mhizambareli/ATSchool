@@ -41,6 +41,8 @@ public class Earth extends NatureElement {
             result = new Mud("Mud");
             System.out.println(this.getName() + " + " + element.getName() + " = " + result.getName());
         }
+        if (result == null) throw new UnsupportedOperationException();
+
         return result;
     }
 }

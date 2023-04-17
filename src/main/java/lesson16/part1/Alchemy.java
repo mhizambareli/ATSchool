@@ -1,5 +1,11 @@
 package lesson16.part1;
 
+import lesson16.part1.basicElements.Water;
+import lesson16.part1.derivedElements.Energy;
+import lesson16.part1.derivedElements.Mud;
+
+import java.util.NoSuchElementException;
+
 /**
  * класс Alchemy
  * метод main
@@ -17,12 +23,15 @@ public class Alchemy {
         }
         //Создаём массив с элементами, проверяем что для всех переданных аргументов возможно создать элемент
         NatureElement[] elements = new NatureElement[args.length];
-        for (int i = 0; i < args.length; i++) {
-            if (NatureElement.create(args[i]) == null) {
-                System.exit(1);
+        try {
+            for (int i = 0; i < args.length; i++) {
+                elements[i] = NatureElement.create(args[i]);
             }
-            elements[i] = NatureElement.create(args[i]);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            System.exit(2);
         }
+
 
         //делим массив на пары по 2 элемента для сложения/объединения в новые элементы
         if (elements.length % 2 == 0) { //для чётного кол-ва элементов
@@ -33,6 +42,38 @@ public class Alchemy {
             for (int i = 0; i < elements.length - 1; i += 2) { //для нечётного кол-ва элементов последний не трогаем
                 elements[i].connect(elements[i + 1]);
             }
+        }
+
+        //проверяю новые операции объединения элементов, выбрасываемые исключения и то, что они не останавливают работу программы
+        NatureElement energy = new Energy("Energy");
+        NatureElement water = new Water("Water");
+        NatureElement mud = new Mud("Mud");
+
+        try {
+            energy.connect(water); //Energy + Water = Steam
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Операция не поддерживается");
+            e.printStackTrace();
+        }
+
+        try {
+            energy.connect(mud); //Исключение
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Операция не поддерживается");
+            e.printStackTrace();
+        }
+        try {
+            mud.connect(water); //Исключение
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Операция не поддерживается");
+            e.printStackTrace();
+        }
+
+        try {
+            water.connect(energy); //Water + Energy = Steam
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Операция не поддерживается");
+            e.printStackTrace();
         }
     }
 }
