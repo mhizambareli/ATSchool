@@ -45,27 +45,55 @@ public class FruitBase implements Serializable {
      * Метод сериализует и экспортирует (сохраняет файл в ресурсы) каталог фруктов из конкретного объекта фруктовой базы
      */
     public void exportCatalogue() {
-        try (FileOutputStream outputStream = new FileOutputStream("src/main/resources/FruitCatalog.ser")) {
+        String defaultPath = "src/main/resources/FruitCatalog.ser";
+        try (FileOutputStream outputStream = new FileOutputStream(defaultPath)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(this.catalogue);
             objectOutputStream.close();
-            System.out.println("Каталог экспортирован\n");
+            System.out.println("Каталог экспортирован в " + defaultPath + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
+     * Метод сериализует и экспортирует (сохраняет файл в ресурсы) по указанному пути каталог фруктов из конкретного объекта фруктовой базы
+     * @param path путь, куда сохраняем файл при экспорте
+     * @throws Exception
+     */
+    public void exportCatalogue(String path) throws Exception {
+        FileOutputStream outputStream = new FileOutputStream(path);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(this.catalogue);
+        objectOutputStream.close();
+        System.out.println("Каталог экспортирован в " + path + "\n");
+    }
+
+    /**
      * Метод десериализует и импортирует (достаёт файл из рерурсов) значение для переменной catalogue конкретного объекта фруктовой базы
      */
     public void importCatalogue() {
-        try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/FruitCatalog.ser")) {
+        String defaultPath = "src/main/resources/FruitCatalog.ser";
+        try (FileInputStream fileInputStream = new FileInputStream(defaultPath)) {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             this.catalogue = (FruitCatalogue) objectInputStream.readObject();
-            System.out.println("Каталог импортирован\n");
+            System.out.println("Каталог импортирован из " + defaultPath + "\n");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Метод десериализует и импортирует (достаёт файл из рерурсов по указанному пути) значение для переменной catalogue конкретного объекта фруктовой базы
+     *
+     * @param path путь, откуда импортируем файл
+     * @throws Exception
+     */
+    public void importCatalogue(String path) throws Exception {
+        FileInputStream fileInputStream = new FileInputStream(path);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        this.catalogue = (FruitCatalogue) objectInputStream.readObject();
+        System.out.println("Каталог импортирован из " + path + "\n");
     }
 
     public FruitCatalogue getCatalogue() {
