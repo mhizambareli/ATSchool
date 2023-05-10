@@ -34,9 +34,7 @@ public class FruitBase implements Serializable {
     public void takeOrder(String[] order) {
         cargo = new Cargo();
         for (String fruit : order) {
-            if (catalogue.findFruit(fruit) != null) {
-                cargo.addFruit(catalogue.findFruit(fruit));
-            }
+            if (catalogue.findFruit(fruit) != null) cargo.addFruit(catalogue.findFruit(fruit));
         }
         System.out.println(cargo);
     }

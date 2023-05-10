@@ -28,12 +28,12 @@ public abstract class Fruit implements Serializable {
         freshness = FRESH;
     }
 
-    /**
-     * Метод клонирования объектов классов-наследников Fruit
-     *
-     * @return новый объект класса-наследника Fruit с теми же полями, что и у объекта, у которого метод был вызван.
-     */
-    public abstract Fruit clone();
+    public Fruit(double weight, BigDecimal price, String name, Freshness freshness) {
+        this.weight = weight;
+        this.price = price;
+        this.name = name;
+        this.freshness = freshness;
+    }
 
     @Override
     public boolean equals(Object o) {

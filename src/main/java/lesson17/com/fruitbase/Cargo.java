@@ -69,6 +69,7 @@ public class Cargo implements Delivery {
     /**
      * Метод собирает названия фруктов в заказе в формате - запятые и пробелы в качестве разделителей.
      * Например: Apple, Orange
+     * + вывожу стоимость конкретного фрукта для наглядности дороговизны
      *
      * @return строка с названиями фруктов, которые содержатся в заказе/грузе
      */
@@ -77,7 +78,8 @@ public class Cargo implements Delivery {
         if (order.length == 0) return result;
         for (Fruit fruit : order) {
             if (fruit == null) continue;
-            result += fruit.getName() + ", ";
+            result += fruit.getName() + " (стоимость = " + fruit.getPrice() + " у.е),\n";
+            //вариант без стоимости: result += fruit.getName() + ", ";
         }
         if (result.length() > 0) result = result.substring(0, result.length() - 2);
         return result;
@@ -90,6 +92,7 @@ public class Cargo implements Delivery {
 
     /**
      * Метод удаляет переданный фрукт из внутреннего массива, если таков найден в массиве
+     * + вывожу стоимость конкретного фрукта для наглядности дороговизны
      *
      * @param fruit фрукт, который нужно удалить из массива
      * @return если найден фрукт, то возвращается этот фрукт, если нет, то null
@@ -114,12 +117,13 @@ public class Cargo implements Delivery {
             }
         }
         order = newArr;
+        System.out.println("Фрукт " + fruit.getName() + " (стоимость = " + fruit.getPrice() + " у.е)");//если стоимость не нужна - удалить или закомментить
         return fruit;
     }
 
     @Override
     public String toString() {
-        if (order.length == 0) return "Указанных фруктов не найдено. Заказ невозможен.";
+        if (order.length == 0) return "Указанных фруктов не найдено. Заказ невозможен.\n";
         else return "Груз весом " + getWeight() + " кг на сумму " + getPrice() + " у.е\n" +
                 "Состав груза: " + namesInOrder() + "\n";
     }

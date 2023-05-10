@@ -1,29 +1,16 @@
 package lesson17.com;
 
+import lesson17.com.customer.FreshCustomer;
+import lesson17.com.customer.UniqueCustomer;
+import lesson17.com.fruitbase.fruits.*;
+import lesson17.com.customer.Customer;
 import lesson17.com.fruitbase.FruitBase;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 
-
-/**
- * Задание 5.6 часть 2
- * В проект фруктовой базы добавьте возможность через аргументы указать файл,
- * в который экспортировать или импортировать каталог.
- * Если после флага '-e' или '-i' следует '=', то каталог записывать или, соответственно,
- * считывается из файла по указанному пути.
- * Исключения обрабатываются в классе Simulation. При исключениях программа завершается со следующими сообщениями:
- * - если файл не найден (FileNotFoundException), то выводится сообщение: "Не найден файл "
- * - если происходит исключение при экспорте или импорте (IOException), то, например для экспорта -
- * "Ошибка при экспорте каталога в "
- * - если происходит чтение неподходящей версии файла, то сообщение
- * "Невозможно импортировать каталог из файла: неподдерживаемая версия"
- * - в остальных случаях сообщения для импорта и экспорта
- * "Непредвиденная ошибка при импорте каталога из файла"
- * "Непредвиденная ошибка при экспорте каталога из файла"
- */
 public class Simulation {
-
     public static void handleExport(FruitBase base, String path) {
         try {
             base.exportCatalogue(path);
@@ -71,6 +58,53 @@ public class Simulation {
         } else if (args[0].equals("-i") || args[0].equals("--import")) {
             base.importCatalogue();
         }
+        System.out.print("Первоначальный груз: ");
+        base.takeOrder(args);
 
+        /**
+         * в классе Simulation, используя анонимный класс, добавьте покупателя, который выбирает дорогие фрукты.
+         * Дорогими считаются, те, чья стоимость больше или равна 75% от максимальной.
+         */
+        Customer richCustomer = new Customer(new Fruit[0], "OOO Богач") {
+            @Override
+            public Fruit[] takeFruits(Fruit[] order) {
+                this.setPurchases(order.clone());//клонируем актуальный состав груза в массив покупок конкретного покупателя
+                BigDecimal maxPrice = BigDecimal.valueOf(0);
+                //переберём массив и найдём максимальную стоимость, от которой будем считать
+                for (Fruit fruit : purchases) {
+                    if (fruit.getPrice().compareTo(maxPrice) > 0) maxPrice = fruit.getPrice();
+                }
+                //переберём ещё раз массив и узнаем, сколько у нас дорогих фруктов
+                int count = 0; //тут будет кол-во подходящих фруктов
+                for (Fruit fruit : purchases) {
+                    if (fruit.getPrice().compareTo(maxPrice.multiply(BigDecimal.valueOf(0.75))) >= 0) count++;
+                }
+                //создаём итоговый массив и добавляем туда дорогие фрукты
+                Fruit[] newArr = new Fruit[count];
+                int i = 0;
+                for (Fruit fruit : purchases) {
+                    if (fruit.getPrice().compareTo(maxPrice.multiply(BigDecimal.valueOf(0.75))) >= 0) {
+                        newArr[i] = fruit;
+                        i++;
+                    }
+                }
+                return purchases = newArr;
+            }
+        };
+
+        UniqueCustomer customer1 = new UniqueCustomer(new Fruit[0], "ООО Уникальные Овощи"); //актуальный массив будет установлен далее через сеттер в takeFruits()
+        FreshCustomer customer2 = new FreshCustomer(new Fruit[0], "ООО Свежие Овощи"); //актуальный массив будет установлен далее через сеттер в takeFruits()
+
+        Customer[] customers = new Customer[]{richCustomer, customer1, customer2};
+
+        for (Customer customer : customers) {
+            customer.takeFruits(base.getCargo().getFruits()); //выбираем фрукты в зависимости от того, какой это покупатель - свежие или уникальные фрукты
+            System.out.printf("Покупатель %s выбрал: ", customer.getName());
+            customer.printPurchases(); //выводим выбранные покупателем фрукты
+            for (int i = 0; i < customer.getPurchases().length; i++) {
+                base.getCargo().removeFruit(customer.getPurchases()[i]); //удаление фруктов из груза, если фрукты были выбраны покупателем
+            }
+            System.out.println("\nОставшийся груз: " + base.getCargo()); //выводим информацию об оставшемся грузе после выбора покупателя.
+        }
     }
 }
