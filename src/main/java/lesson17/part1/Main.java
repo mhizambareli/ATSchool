@@ -62,11 +62,10 @@ public class Main {
                 break;
             case "Wave":
                 function = new Function() {
-                    int result = 0;
                     int previous = 0;
                     @Override
                     public int evaluate(int x) {
-                        result = x + previous;
+                        int result = x + previous;
                         previous = x;
                         return result;
                     }
