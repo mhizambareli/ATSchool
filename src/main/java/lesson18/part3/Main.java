@@ -86,7 +86,7 @@ public class Main {
 
         //Вывести на экран название растения из карты и рядом с ним имя класса через пробел.
         collection.forEach((key, value) -> {
-            System.out.println(key + " " + value.getClass());
+            System.out.println(key + " " + value.getClass().getSimpleName());
         });
     }
 }
