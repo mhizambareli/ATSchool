@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 /**
  * Создать ArrayList plants и заполнить его экземплярами фруктов и овощей всех видов по 1 штуке каждого (!в 1 ArrayList).
- * Создать HashMap и заполнить его фруктами и овощами с помощью forEach, в ключ записывая название фрукта/овоща, а в значение - само растение.
+ * Создать HashMap и заполнить его фруктами и овощами с помощью forEach(), в ключ записывая название фрукта/овоща, а в значение - само растение.
  * Вывести на экран название растения из карты и рядом с ним имя класса через пробел.
  */
 public class Main {
@@ -78,11 +78,9 @@ public class Main {
         plants.add(apple);
         plants.add(banana);
 
-        //Создать HashMap и заполнить его фруктами и овощами с помощью forEach, в ключ записывая название фрукта/овоща, а в значение - само растение.
+        //Создать HashMap и заполнить его фруктами и овощами с помощью forEach(), в ключ записывая название фрукта/овоща, а в значение - само растение.
         HashMap<String, Plant> collection = new HashMap<>();
-        for (Plant plant : plants) {
-            collection.put(plant.getName(), plant);
-        }
+        plants.forEach(entry -> collection.put(entry.getName(), entry));
 
         //Вывести на экран название растения из карты и рядом с ним имя класса через пробел.
         collection.forEach((key, value) -> {
