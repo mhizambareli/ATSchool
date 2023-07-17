@@ -1,5 +1,6 @@
 package homework11_3.part1;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -30,6 +31,7 @@ public class FirstTest {
     }
 
     @Test
+    @Tag("abc")
     public void testLoginPage() {
         open(loginPage.getPageUrl());
         getWebDriver().manage().window().maximize();
