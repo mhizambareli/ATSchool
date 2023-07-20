@@ -78,9 +78,4 @@ public class Director {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public static void main(String[] args) {
-        DirectorRepositoryImpl director = new DirectorRepositoryImpl();
-        director.get(5);
-    }
 }
