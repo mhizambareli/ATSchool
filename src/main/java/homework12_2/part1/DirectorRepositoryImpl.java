@@ -76,8 +76,13 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     void prepareDB() {
         PreparedStatement statement;
         try {
-            statement = connection.prepareStatement("DELETE FROM public.\"Directors\"");
+            //Мне лень было дублировать базу данных для второго задания, поэтому тут тоже чищу таблицу Movies, которой по первому заданию ещё нет.
+            statement = connection.prepareStatement("DELETE FROM public.\"Movies\"");
             int row = statement.executeUpdate();
+            System.out.println("Удалено " + row + " строк");
+
+            statement = connection.prepareStatement("DELETE FROM public.\"Directors\"");
+            row = statement.executeUpdate();
             System.out.println("Удалено " + row + " строк");
 
             statement = connection.prepareStatement("INSERT INTO public.\"Directors\" VALUES (?, ?, ?, ?, ?)");
