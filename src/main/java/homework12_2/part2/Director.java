@@ -2,24 +2,6 @@ package homework12_2.part2;
 
 import java.sql.Date;
 
-/**
- * Задание 12.2 часть 1
- * Дана таблица Directors:
- * id         serial (ключ) // номер записи
- * first_name text          // имя
- * last_name  text          // фамилия
- * birth_date  date         // дата рождения
- * country    text          // страна
- * <p>
- * Добавьте класс Director, соответствующий записям в таблице Directors.
- * Добавьте интерфейс DirectorRepository со следующими методами:
- * -  Director get(int id)           - находит запись в таблице по номеру
- * -  void save(Director director)   - сохраняет запись в таблицу
- * -  void delete(Director director) - удаляет запись в таблице
- * Добавьте класс DirectorRepositoryImpl, реализующий интерфейс DirectorRepository.  В конструктор класса передается Connection к бд.
- * <p>
- * Напишите позитивные тесты, проверяющие выполнение методов DirectorRepositoryImpl.
- */
 public class Director {
 
     private int id;
@@ -77,10 +59,5 @@ public class Director {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public static void main(String[] args) {
-        DirectorRepositoryImpl director = new DirectorRepositoryImpl();
-        director.get(5);
     }
 }

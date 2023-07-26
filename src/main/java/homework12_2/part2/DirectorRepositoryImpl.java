@@ -1,6 +1,8 @@
 package homework12_2.part2;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DirectorRepositoryImpl implements DirectorRepository {
     Connection connection;
@@ -71,13 +73,84 @@ public class DirectorRepositoryImpl implements DirectorRepository {
     }
 
     /**
+     * @param size размер списка, сколько нужно параметров для запроса
+     * @return строка типа ?, ?, ? для параметризованного sql запроса
+     */
+    private static String getQuestionMarks(int size) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            sb.append("?");
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public List<Director> get(List<String> genres) {
+        DirectorRepositoryImpl directors = new DirectorRepositoryImpl();
+        List<Director> resultList = new ArrayList<>();
+        if (genres.size() > 0) {
+            String sql = "SELECT DISTINCT \"director\" FROM \"Movies\" WHERE \"genre\" IN (" + getQuestionMarks(genres.size()) + ")";
+
+            PreparedStatement statement;
+            try {
+                statement = connection.prepareStatement(sql);
+                // Задание параметров запроса для каждого жанра
+                for (int i = 0; i < genres.size(); i++) {
+                    statement.setString(i + 1, genres.get(i));
+                }
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    Director dir = directors.get(resultSet.getInt(1));
+                    System.out.println("Найдены следующие режиссёры:");
+                    if (dir != null) {
+                        resultList.add(dir);
+                        System.out.printf("DirectorID: %s, Имя:%s %s\n\n", dir.getId(), dir.getFirst_name(), dir.getLast_name());
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return resultList;
+    }
+
+    // Вспомогательный метод для проверки наличия жанра у режиссера
+    public boolean hasGenre(Director director, String genre) {
+        boolean result = false;
+        try {
+            Statement statement = connection.createStatement();
+            boolean isSelected = statement.execute(String.format("SELECT DISTINCT \"genre\"  FROM \"Movies\" WHERE \"director\" = %d ", director.getId()));
+
+            if (isSelected) {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    result = genre.equals(resultSet.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+
+    /**
      * Метод подготовки базы к проверкам: удаление всей информации из базы и добавление трёх записей
      */
     void prepareDB() {
         PreparedStatement statement;
         try {
-            statement = connection.prepareStatement("DELETE FROM public.\"Directors\"");
+            statement = connection.prepareStatement("DELETE FROM public.\"Movies\"");
             int row = statement.executeUpdate();
+            System.out.println("Удалено " + row + " строк");
+
+            statement = connection.prepareStatement("DELETE FROM public.\"Directors\"");
+            row = statement.executeUpdate();
             System.out.println("Удалено " + row + " строк");
 
             statement = connection.prepareStatement("INSERT INTO public.\"Directors\" VALUES (?, ?, ?, ?, ?)");
