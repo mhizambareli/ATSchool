@@ -18,7 +18,6 @@ public class TestClass {
 
     @Test
     void getDirectorTest() {
-        //directors.prepareDB();
         Director actual = directors.get(3);
         assertAll(
                 () -> assertEquals("Иван", actual.getFirst_name()),
