@@ -25,9 +25,9 @@ public class DirectorRepositoryImpl implements DirectorRepository {
                 while (resultSet.next()) {
                     directorRes = new Director();
                     directorRes.setId(resultSet.getInt(1));
-                    directorRes.setFirst_name(resultSet.getString(2));
-                    directorRes.setLast_name(resultSet.getString(3));
-                    directorRes.setBirth_date(resultSet.getDate(4));
+                    directorRes.setFirstName(resultSet.getString(2));
+                    directorRes.setLastName(resultSet.getString(3));
+                    directorRes.setBirthDate(resultSet.getDate(4));
                     directorRes.setCountry(resultSet.getString(5));
                 }
             }
@@ -45,9 +45,9 @@ public class DirectorRepositoryImpl implements DirectorRepository {
         try {
             statement = connection.prepareStatement("INSERT INTO public.\"Directors\" VALUES (?, ?, ?, ?, ?)");
             statement.setInt(1, director.getId());
-            statement.setString(2, director.getFirst_name());
-            statement.setString(3, director.getLast_name());
-            statement.setDate(4, director.getBirth_date());
+            statement.setString(2, director.getFirstName());
+            statement.setString(3, director.getLastName());
+            statement.setDate(4, director.getBirthDate());
             statement.setString(5, director.getCountry());
             int row = statement.executeUpdate();
             System.out.println("Добавлена " + row + " строка");

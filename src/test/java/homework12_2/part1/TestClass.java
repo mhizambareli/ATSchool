@@ -20,9 +20,9 @@ public class TestClass {
     void getDirectorTest() {
         Director actual = directors.get(3);
         assertAll(
-                () -> assertEquals("Иван", actual.getFirst_name()),
-                () -> assertEquals("Иванов", actual.getLast_name()),
-                () -> assertEquals(Date.valueOf("1999-05-11"), actual.getBirth_date()),
+                () -> assertEquals("Иван", actual.getFirstName()),
+                () -> assertEquals("Иванов", actual.getLastName()),
+                () -> assertEquals(Date.valueOf("1999-05-11"), actual.getBirthDate()),
                 () -> assertEquals("Россия", actual.getCountry())
         );
         System.out.println("Режиссёр был успешно получен.");
@@ -37,9 +37,9 @@ public class TestClass {
 
         assertAll(
                 () -> assertEquals(directorToSave.getId(), actualInDB.getId()),
-                () -> assertEquals(directorToSave.getFirst_name(), actualInDB.getFirst_name()),
-                () -> assertEquals(directorToSave.getLast_name(), actualInDB.getLast_name()),
-                () -> assertEquals(directorToSave.getBirth_date(), actualInDB.getBirth_date()),
+                () -> assertEquals(directorToSave.getFirstName(), actualInDB.getFirstName()),
+                () -> assertEquals(directorToSave.getLastName(), actualInDB.getLastName()),
+                () -> assertEquals(directorToSave.getBirthDate(), actualInDB.getBirthDate()),
                 () -> assertEquals(directorToSave.getCountry(), actualInDB.getCountry())
         );
     }
