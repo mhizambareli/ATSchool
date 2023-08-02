@@ -60,7 +60,7 @@ public class DummyJsonClientImpl implements DummyJsonClient {
         Response result;
 
         try {
-            HttpGet httpGet = new HttpGet(BASE_URL + "/posts/user/" + user.getId());
+            HttpGet httpGet = new HttpGet(BASE_URL + "/auth/posts/user/" + user.getId());
             httpGet.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token.getToken());
             CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
             HttpEntity httpEntity = httpResponse.getEntity();

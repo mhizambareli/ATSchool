@@ -97,5 +97,10 @@ public class ApacheHttpClientTest {
         User nonExistent = new User(111111, "abc", "def");
         Response negativeResponse = client.getPosts(nonExistent, token);
         assertEquals(404, negativeResponse.getStatusCode());
+
+        //Запрос при неверном токене
+        Token testToken = new Token("ааа");
+        Response negativeResponse2 = client.getPosts(user, testToken);
+        assertEquals(401, negativeResponse2.getStatusCode());
     }
 }
