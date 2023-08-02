@@ -1,6 +1,7 @@
 package homework13_4.part1;
 
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -16,9 +17,11 @@ import static io.restassured.RestAssured.given;
 
 public class BearerTokenTest {
     @Test
+    @Tag("13.4.1")
+    @Tag("Bearer")
     public void testBearerTokenAuth() {
         RestAssured.baseURI = "https://httpbin.org";
-        String token = "123"; // замените на свой токен
+        String token = "123";
 
         given()
                 .auth().oauth2(token)

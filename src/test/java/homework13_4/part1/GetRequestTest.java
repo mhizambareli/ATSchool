@@ -1,6 +1,7 @@
 package homework13_4.part1;
 
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +15,8 @@ import static org.hamcrest.Matchers.equalTo;
  */
 public class GetRequestTest {
     @Test
+    @Tag("13.4.1")
+    @Tag("GET")
     public void testGetRequestWithParameters() {
         RestAssured.baseURI = "https://httpbin.org";
         String p1 = "v1";

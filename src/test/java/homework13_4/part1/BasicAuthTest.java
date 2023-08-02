@@ -1,6 +1,7 @@
 package homework13_4.part1;
 
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -13,6 +14,8 @@ import static io.restassured.RestAssured.given;
  */
 public class BasicAuthTest {
     @Test
+    @Tag("13.4.1")
+    @Tag("BasicAuth")
     public void testBasicAuth() {
         RestAssured.baseURI = "https://httpbin.org";
         String username = "user";
