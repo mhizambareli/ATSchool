@@ -97,11 +97,5 @@ public class ApacheHttpClientTest {
         User nonExistent = new User(111111, "abc", "def");
         Response negativeResponse = client.getPosts(nonExistent, token);
         assertEquals(404, negativeResponse.getStatusCode());
-
-
-        //Проверка на неправильный токен по сути бесполезна, т.к. данному методу, как оказалось, вообще всё равно на токен.
-        Token testToken = new Token("");
-        Response negativeResponse2 = client.getPosts(user, testToken);
-        assertEquals(403, negativeResponse2.getStatusCode(), "Багуля в самом методе https://dummyjson.com/auth/posts/{user.id}. Всегда результат с кодом ответа 200, какой бы токен не вводила.");
     }
 }
