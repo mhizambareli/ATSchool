@@ -12,22 +12,9 @@ public class Response {
     private final int statusCode;
     private final String body;
 
-    public User parseToUser() {
+    public <T> T parseToObject(Class<T> tClass) {
         Gson gson = new Gson();
-        User user = gson.fromJson(body, User.class);
-        return user;
-    }
-
-    public Token parseToToken() {
-        Gson gson = new Gson();
-        Token token = gson.fromJson(body, Token.class);
-        return token;
-    }
-
-    public List<Post> parseToPost() {
-        Gson gson = new Gson();
-        PostResponseWrapper postResponseWrapper = gson.fromJson(body, PostResponseWrapper.class);
-        return postResponseWrapper.getPosts();
+        return gson.fromJson(body, tClass);
     }
 
     public Response(int statusCode, String body) {

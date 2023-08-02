@@ -20,7 +20,7 @@ public class ApacheHttpClientTest {
         //Проверим получение вообще всех существующих юзеров + несколько ассертов на поля некоторых объектов
         for (int i = 1; i <= 100; i++) {
             response = client.getUser(i);
-            User user = response.parseToUser();
+            User user = response.parseToObject(User.class);
             System.out.println(user.toJson());
             assertEquals(200, response.getStatusCode());
             if (i == 20) {
@@ -55,11 +55,11 @@ public class ApacheHttpClientTest {
 
         //Проверим логин существующих юзеров
         for (int i = 1; i <= 100; i++) {
-            User user = client.getUser(i).parseToUser();
+            User user = client.getUser(i).parseToObject(User.class);
             Response response = client.login(user);
             JsonObject jsonObject = jsonParser.parse(response.getBody()).getAsJsonObject();
             String expectedToken = jsonObject.get("token").getAsString();
-            Token token = response.parseToToken();
+            Token token = response.parseToObject(Token.class);
             assertAll(
                     () -> assertEquals(200, response.getStatusCode()),
                     () -> assertEquals(expectedToken, token.getToken())
@@ -79,10 +79,10 @@ public class ApacheHttpClientTest {
     @Test
     @Tag("13.4.2")
     public void testGetPosts() {
-        User user = client.getUser(1).parseToUser();
-        Token token = client.login(user).parseToToken();
+        User user = client.getUser(1).parseToObject(User.class);
+        Token token = client.login(user).parseToObject(Token.class);
         Response response = client.getPosts(user, token);
-        List<Post> posts = response.parseToPost();
+        List<Post> posts = response.parseToObject(PostResponseWrapper.class).getPosts();
         assertAll(
                 () -> assertEquals(200, response.getStatusCode()),
                 () -> assertEquals(3, posts.size())
