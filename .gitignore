@@ -7,3 +7,5 @@
 log/
 target/
 build/
+allure-results/
+.allure/
